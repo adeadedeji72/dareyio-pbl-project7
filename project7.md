@@ -154,5 +154,9 @@ Run the above command from the folder where tooling-db.sql file is located
 Create in MySQL a new admin user with username: myuser and password: password:
 ~~~
 INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
--> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+-> (1, ‘user1’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user1@mail.com’, ‘admin’, ‘1’);
 ~~~
+
+Open the website in your browser http://52.23.186.206/index.php and make sure you can login into the websute with user1 user
+
+
