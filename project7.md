@@ -130,4 +130,29 @@ sudo setsebool -P httpd_execmem 1
 ~~~
 **Repeat steps 1-5 for another 2 Web Servers.**
 
+6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files – it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other Web Servers.
 
+7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step №4 to make sure the mount point will persist after reboot.
+
+8. Fork the tooling source code from Darey.io Github Account to your Github account. (Learn how to fork a repo here)
+
+9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+
+10. check permissions to your /var/www/html folder and also disable SELinux sudo setenforce 0
+To make this change permanent – open following config file 
+~~~
+sudo vi /etc/sysconfig/selinux
+~~~
+and set SELINUX=disabledthen restart httpd.
+
+11. Update the website’s configuration to connect to the database (in /var/www/html/functions.php file). Apply tooling-db.sql script to your database using this command 
+~~~
+mysql -h <172.31.09.97> -u webaccess -p tooling < tooling-db.sql
+~~~
+Run the above command from the folder where tooling-db.sql file is located 
+
+Create in MySQL a new admin user with username: myuser and password: password:
+~~~
+INSERT INTO ‘users’ (‘id’, ‘username’, ‘password’, ’email’, ‘user_type’, ‘status’) VALUES
+-> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+~~~
